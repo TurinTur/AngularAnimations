@@ -7,7 +7,7 @@
 <div *ngIf="items" class="list-group" >
   <!--animaciones se ponen con @nombreTrigger-->
   <button type="button"
-      @fade-state       
+      @todoAnimation
       *ngFor="let item of items"
       (click)="removeItem(item)"
       class="list-group-item"
