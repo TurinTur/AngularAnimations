@@ -1,4 +1,4 @@
-import { trigger, transition, style, animate, state, keyframes, animation, useAnimation } from "@angular/animations";
+import { trigger, transition, style, animate, state, keyframes, animation, useAnimation, group } from "@angular/animations";
                                                 // OT: Hay una libreria llamada animate.css con efectos predefinidos bastante útil
 
 export let fade =
@@ -34,6 +34,22 @@ export let fadeState2 =
       ])
   ]) ;       
   
+export let fadeInAnimation = animation ([
+    style({ opacity:0}),               
+    animate('{{ duration }} {{ easing }}')                  // Parametros con interpolación
+], {params: {                 // animationOptions object, para tener valores por defecto si no se pasa nada en los parámetros
+     duration: '2s', 
+     easing:'ease-out'}});              
+export let fadeOutAnimation = animation ([
+    animate( 2000, style({ opacity:0}))  
+]);
+
+export let fadeState3 =
+    trigger('fadeState3',[                                                                   // Parametrizando
+      transition(':enter', useAnimation(fadeInAnimation,{params:{duration: '500ms'}})),      // Uso parametro duración
+      transition(':leave', useAnimation(fadeOutAnimation))  
+]) ;      
+
 export let bounceOutLeftAnimation = animation(            
     animate('1000ms 0.1s ease-out', keyframes([        // KEYFRAMES
         style({
@@ -64,4 +80,13 @@ export let slide = trigger('slide', [
        useAnimation(bounceOutLeftAnimation)
     ])
 ])
-  
+
+export let slide2 = trigger('slide2', [
+    transition(':enter', [
+        group([ 
+            animate(3500), style({backgroundColor : 'red'}),     // Froma facil de dos animaciones simultáneas
+            animate(1500), style({transform : 'translateY(330px)'})
+        ])
+    ])
+])
+

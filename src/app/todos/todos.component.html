@@ -1,15 +1,21 @@
-<h1>Todos</h1>
+<div @staggerTodosAnimation>
+  <h1>Todos</h1>
 
-<input #itemInput
-  class="form-control"
-  (keyup.enter)="addItem(itemInput)">
+  <input #itemInput
+    class="form-control"
+    (keyup.enter)="addItem(itemInput)">
 
-<div *ngIf="items" class="list-group" >
-  <!--animaciones se ponen con @nombreTrigger-->
-  <button type="button"
-      @todoAnimation
-      *ngFor="let item of items"
-      (click)="removeItem(item)"
-      class="list-group-item"
-      >{{ item }}</button>
-</div> 
+  <div *ngIf="items" class="list-group" >
+    <!--animaciones se ponen con @nombreTrigger. Tiene dos metodos callback para saber cuando empiezan y cuando terminan-->
+    <button type="button"
+        @todoAnimation
+        (@todoAnimation.start)="animationStarted($event)"
+        (@todoAnimation.done)="animationDone($event)"
+        *ngFor="let item of items"
+        (click)="removeItem(item)"
+        class="list-group-item"
+        >{{ item }}</button>
+  </div> 
+
+  <h1>Todosdd</h1>
+</div>
