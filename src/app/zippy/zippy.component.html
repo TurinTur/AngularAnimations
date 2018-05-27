@@ -11,7 +11,10 @@
       }"
     ></span>
   </div>
-  <div class="zippy-body" [hidden]="!isExpanded">
+  <!--Se pueden definir el estado con prop. binding-->
+  <div 
+      [@expandCollapse]="isExpanded ? 'expanded' : 'collapsed'"  
+    class="zippy-body" >  <!-- [hidden]="!isExpanded" Solo se oculta, no llega a quitarse del DOM. Asi que necesito un custom state-->
     <ng-content></ng-content>
   </div>
 </div>
